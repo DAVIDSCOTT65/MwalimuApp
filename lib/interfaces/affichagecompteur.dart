@@ -54,7 +54,7 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
 
   @override
   void initState() {
-    //super.initState();
+    super.initState();
     //affichage;
     
     
@@ -83,7 +83,7 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                   child: ListView.builder(
                     itemCount: dispensesData == null ? 0 : dispensesData.length,
                     itemBuilder: (context, i) {
-                      cours = dispensesData[i].cours;
+                     String _date = dispensesData[i].date;
                       temps = dispensesData[i].heure +
                           ":" +
                           dispensesData[i].minute +
@@ -93,42 +93,14 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                       nbrVisiteur = dispensesData[i].visiteur;
                       nbrEtudiant = dispensesData[i].etudiant;
 
-                      affichage() {
-                        for (var i = 0; i < dispensesData.length; i++) {
-                          affichageCours(
-                              int.parse(dispensesData[i].etudiant),
-                              int.parse(dispensesData[i].ouvrage),
-                              int.parse(dispensesData[i].visiteur));
-                        }
-                      }
-
-                      void calcul() {
-                        _minute = int.parse(dispensesData[i].minute);
-                        int _seconde = int.parse(dispensesData[i].seconde);
-                        int _heure = int.parse(dispensesData[i].heure);
-
-                        if (_seconde >= 60) {
-                          do {
-                            _minute++;
-                            _seconde = -60;
-                            if (_minute >= 60) {
-                              do {
-                                _heure;
-                                _minute = -60;
-                              } while (_minute >= 60);
-                            }
-                          } while (_seconde >= 60);
-                        } else {}
-                      }
-
                       return new Card(
                         child: Row(
                           children: <Widget>[
                             Container(
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.bookmark),
-                                  Text(cours),
+                                  Icon(Icons.view_day),
+                                  Text(_date),
                                 ],
                               ),
                             ),
@@ -187,6 +159,7 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                 );
         },
       ),
+      
       bottomNavigationBar: FutureBuilder(
         future: db.getSommeCourDispense(coursActuel),
         builder: (context, snapshot) {
@@ -196,7 +169,8 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
           dispensesSomme = data;
           int i = 0;
 
-          cours = dispensesSomme[i].cours;
+          var _date = DateTime.now();
+          String now = "${_date.day}-${_date.month}-${_date.year}";
           _nbrOuvrage = int.parse(dispensesSomme[i].ouvrage);
           _nbrVisiteur = int.parse(dispensesSomme[i].visiteur);
           _nbrEtudiant = int.parse(dispensesSomme[i].etudiant);
@@ -243,27 +217,27 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                       new Card(
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.bookmark),
-                        Text(cours),
+                        Icon(Icons.view_day, color: Colors.purple,),
+                        Text(now),
                         Padding(
                           padding: EdgeInsets.all(10.0),
                         ),
-                        Icon(Icons.timer),
+                        Icon(Icons.timer, color: Colors.purple),
                         Text(_heure.toString()+":"+_minute.toString()+":"+_seconde.toString()),
                         Padding(
                           padding: EdgeInsets.all(15.0),
                         ),
-                        Icon(Icons.book),
+                        Icon(Icons.book, color: Colors.purple),
                         Text(_nbrOuvrage.toString()),
                         Padding(
                           padding: EdgeInsets.all(10.0),
                         ),
-                        Icon(Icons.person),
+                        Icon(Icons.person, color: Colors.purple),
                         Text(_nbrVisiteur.toString()),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                         ),
-                        Icon(Icons.people),
+                        Icon(Icons.people, color: Colors.purple),
                         Text(_nbrEtudiant.toString())
                       ],
                     ),
@@ -276,6 +250,7 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                 );
         },
       ),
+    
     );
   }
 }

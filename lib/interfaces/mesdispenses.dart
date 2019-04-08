@@ -7,10 +7,11 @@ class MesDispenses {
   int _ouvrages;
   int  _visiteurs;
   int _etudiants;
+  String _date;
 
   
 
-  MesDispenses(this._cours, this._heure, this._minute, this._seconde, this._ouvrages, this._visiteurs, this._etudiants);
+  MesDispenses(this._cours, this._heure, this._minute, this._seconde, this._ouvrages, this._visiteurs, this._etudiants, this._date);
 
   MesDispenses.map(dynamic obj){
     this._cours = obj['Cours'];
@@ -20,6 +21,7 @@ class MesDispenses {
     this._ouvrages =obj['Ouvrages'];
     this._visiteurs =obj['Visiteurs'];
     this._etudiants =obj['Etudiants'];
+    this._date =obj['Date_Dispense'];
   }
 
   String get cours => _cours;
@@ -29,6 +31,7 @@ class MesDispenses {
   String get ouvrage => _ouvrages.toString();
   String get visiteur => _visiteurs.toString();
   String get etudiant => _etudiants.toString();
+  String get date => _date;
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -40,6 +43,7 @@ class MesDispenses {
     map['Ouvrages'] = _ouvrages;
     map['Visiteurs'] = _visiteurs;
     map['Etudiants'] =_etudiants;
+    map['Date_Dispense'] =_date;
     
 
     return map;

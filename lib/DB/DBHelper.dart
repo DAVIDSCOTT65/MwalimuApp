@@ -34,7 +34,7 @@ class DBHelper {
     await db.execute(
         "CREATE TABLE Cours(id INTEGER PRIMARY KEY, intitule TEXT UNIQUE, type TEXT, objectif TEXT)");
     await db.execute(
-        "CREATE TABLE Dispenser(id INTEGER PRIMARY KEY, Cours TEXT, Heure INTEGER, Minute INTEGER, Seconde INTEGER, Ouvrages INTEGER, Visiteurs INTEGER, Etudiants INTEGER)");
+        "CREATE TABLE Dispenser(id INTEGER PRIMARY KEY, Cours TEXT, Heure INTEGER, Minute INTEGER, Seconde INTEGER, Ouvrages INTEGER, Visiteurs INTEGER, Etudiants INTEGER, Date_Dispense TEXT)");
     print("La base de données a été crée");
   }
 
@@ -78,7 +78,8 @@ class DBHelper {
           list[i]['Seconde'],
           list[i]['Ouvrages'],
           list[i]['Visiteurs'],
-          list[i]['Etudiants']);
+          list[i]['Etudiants'],
+          list[i]['Date_Dispense']);
       dispense.setDispenseId(list[i]['id']);
       dispensesData.add(dispense);
     }
@@ -99,7 +100,8 @@ class DBHelper {
           list[i]['Seconde'],
           list[i]['Ouvrages'],
           list[i]['Visiteurs'],
-          list[i]['Etudiants']);
+          list[i]['Etudiants'],
+          list[i]['Date_Dispense']);
           
       dispense.setDispenseId(list[i]['id']);
       dispensesData.add(dispense);

@@ -31,9 +31,11 @@ class _TimerInterfaceState extends State<TimerInterface>
   String hoursStr = "0";
   String minutesStr = "0";
   String secondsStr = "0";
+  var now =DateTime.now();
 
   Future addRecord() async {
     var db = DBHelper();
+    String datenow = "${now.day}-${now.month}-${now.year}";
     var infoDispense = MesDispenses(
         widget._intituleCours,
         int.parse(hoursStr),
@@ -41,7 +43,8 @@ class _TimerInterfaceState extends State<TimerInterface>
         int.parse(secondsStr),
         ouvrage,
         visiteur,
-        etudiant);
+        etudiant, 
+        datenow);
     await db.saveInfoDispense(infoDispense);
     print("Info dispense enregistrer");
   }
