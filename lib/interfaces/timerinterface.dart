@@ -93,21 +93,7 @@ class _TimerInterfaceState extends State<TimerInterface>
           widget._intituleCours + " en mode dispense",
           style: TextStyle(color: Colors.white),
         ),
-        /*
-        leading: Container(
-            child: new Column(
-          children: <Widget>[
-            SizedBox(width: 300.0),
-            new FloatingActionButton(
-                backgroundColor: Colors.white,
-                onPressed: verification,
-                child: new Icon(
-                  icon,
-                  color: Colors.purple,
-                )),
-          ],
-        )),
-        */
+        
         backgroundColor: Colors.purple,
         // bottom: new TabBar(
         // controller: controller,
@@ -118,7 +104,7 @@ class _TimerInterfaceState extends State<TimerInterface>
         //],
         // ),
       ),
-       drawer: new Drawer(
+      drawer: new Drawer(
         
         child: new ListView(
           children: <Widget>[
@@ -362,7 +348,7 @@ class _TimerInterfaceState extends State<TimerInterface>
               icon: new Icon(Icons.show_chart),
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      new AffichagesDispenses(widget._intituleCours ))),
+                      new AffichagesDispenses(widget._intituleCours))),
             ),
             
           ],

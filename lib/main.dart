@@ -52,6 +52,11 @@ class _HomeState extends State<Home> {
         
         child: new ListView(
           children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text("Mirindi David"),
+              accountEmail: new Text("davidscottmirindi65@gmail.com"),
+              currentAccountPicture: new Image.asset("name"),
+            ),
             new ListTile(
               title: new Text("Liste des cours "),
               trailing: new Icon(Icons.list),
