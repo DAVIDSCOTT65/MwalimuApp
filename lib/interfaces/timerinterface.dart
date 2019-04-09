@@ -2,8 +2,12 @@ import 'dart:async';
 
 import 'package:ag_professeur/DB/DBHelper.dart';
 import 'package:ag_professeur/interfaces/affichagecompteur.dart';
+import 'package:ag_professeur/interfaces/courspopulaire.dart';
+import 'package:ag_professeur/interfaces/heurerestantant.dart';
+import 'package:ag_professeur/interfaces/laffichagecours.dart';
 import 'package:ag_professeur/interfaces/mesdispenses.dart';
 import 'package:ag_professeur/interfaces/ouvragesinterfaces.dart';
+import 'package:ag_professeur/interfaces/rapportjour.dart';
 import 'package:flutter/material.dart';
 import './listedispense.dart' as listecours;
 
@@ -105,33 +109,48 @@ class _TimerInterfaceState extends State<TimerInterface>
         // ),
       ),
       drawer: new Drawer(
-        
         child: new ListView(
           children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text("Miwalimu App"),
+              accountEmail: new Text("www.mwalimuapp.com"),
+              currentAccountPicture: new Image.asset("img/Splash.png"),
+              decoration: new BoxDecoration(color: Colors.purple),
+            ),
             new ListTile(
               title: new Text("Liste des cours "),
-              trailing: new Icon(Icons.list),
+              trailing: new IconButton(
+                icon: Icon(Icons.list),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AffichagesCours())),
+              ),
             ),
             new ListTile(
               title: new Text("Rapports du jour "),
-              trailing: new Icon(Icons.today),
+              trailing: new IconButton(
+                icon: Icon(Icons.today),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => RapportJournalier())),
+              ),
             ),
             new ListTile(
-              title: new Text("A propos de nous"),
-              trailing: new Icon(Icons.developer_board),
+              title: new Text("Les cours populaires"),
+              trailing: new IconButton(
+                  icon: Icon(Icons.developer_board), onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => CoursPopulaire())),),
             ),
             new ListTile(
-              title: new Text("Settings "),
-              trailing: new Icon(Icons.settings),
+              title: new Text("Calcul heures restants"),
+              trailing: new IconButton(
+                icon: Icon(Icons.av_timer),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => HeuresRestants())),
+              ),
             ),
-            new ListTile(
-              title: new Text("Close"),
-              trailing: new Icon(Icons.close),
-            ),
-            
           ],
         ),
       ),
+      
       body: new Column(
         children: <Widget>[
           Padding(
@@ -335,15 +354,6 @@ class _TimerInterfaceState extends State<TimerInterface>
         color: Colors.purple,
         child: new Row(
           children: <Widget>[
-            new IconButton(
-              
-              icon: new Icon(Icons.list),
-              onPressed: () {},
-              
-            ),
-            Padding(
-              padding: EdgeInsets.all(18.0),
-            ),
             new IconButton(
               icon: new Icon(Icons.show_chart),
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(

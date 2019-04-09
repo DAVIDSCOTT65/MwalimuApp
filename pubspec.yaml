@@ -22,6 +22,8 @@ dependencies:
   sqflite: any
   path_provider: ^0.4.0
   flutter_redux:
+
+ 
   
 
 dev_dependencies:
@@ -39,6 +41,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - img/david.png
+    - img/dispense.png
+    - img/Splash.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

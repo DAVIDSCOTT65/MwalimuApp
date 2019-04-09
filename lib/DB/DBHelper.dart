@@ -65,6 +65,19 @@ class DBHelper {
 
     return coursData;
   }
+   Future<List<MesCours>> getHeureRestant() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery("SELECT intitule, Objectif, CAST((Heure + Minute + Seconde) as TEXT)  as Heure FROM Cours INNER JOIN Dispenser ON Dispenser.Cours = Cours.Intitule GROUP BY intitule");
+    List<MesCours> coursData = new List();
+    for (int i = 0; i < list.length; i++) {
+      var cours = new MesCours(
+          list[i]['intitule'], list[i]['objectif'], list[i]['Heure']);
+      cours.setCoursId(list[i]['id']);
+      coursData.add(cours);
+    }
+
+    return coursData;
+  }
 
   Future<List<MesDispenses>> getDispense() async {
     var dbClient = await db;
@@ -109,6 +122,28 @@ class DBHelper {
 
     return dispensesData;
   }
+  Future<List<MesDispenses>> getRapportJournalier(String _date) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient
+        .rawQuery("SELECT * FROM Dispenser WHERE Date_Dispense = ?", [_date]);
+    List<MesDispenses> dispensesData = new List();
+    for (var i = 0; i < list.length; i++) {
+      var dispense = new MesDispenses(
+          list[i]['Cours'],
+          list[i]['Heure'],
+          list[i]['Minute'],
+          list[i]['Seconde'],
+          list[i]['Ouvrages'],
+          list[i]['Visiteurs'],
+          list[i]['Etudiants'],
+          list[i]['Date_Dispense']);
+          
+      dispense.setDispenseId(list[i]['id']);
+      dispensesData.add(dispense);
+    }
+
+    return dispensesData;
+  }
   Future<List<MesDispensesSomme>> getSommeCourDispense(String cours) async {
     var dbClient = await db;
     List<Map> list = await dbClient
@@ -132,4 +167,29 @@ class DBHelper {
 
     return dispensesData;
   }
+  Future<List<MesDispenses>> getCoursPopulaire() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient
+        .rawQuery("SELECT Cours, SUM(Etudiants) AS Etudiants FROM Dispenser GROUP BY Cours ORDER BY Etudiants DESC");
+    List<MesDispenses> dispensesData = new List();
+    for (var i = 0; i < list.length; i++) {
+      
+      var dispense = new MesDispenses(
+          
+          list[i]['Cours'],
+          list[i]['Heures'],
+          list[i]['Minutes'],
+          list[i]['Secondes'],
+          list[i]['Ouvrages'],
+          list[i]['Visiteurs'],
+          list[i]['Etudiants'],
+          list[i]['Date_Dispense']);
+      
+      dispense.setDispenseId(list[i]['id']);
+      dispensesData.add(dispense);
+    }
+
+    return dispensesData;
+  }
+
 }

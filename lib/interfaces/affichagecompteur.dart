@@ -154,6 +154,7 @@ class _AffichagesDispensesState extends State<AffichagesDispenses> {
                 );
         },
       ),
+      
       bottomNavigationBar: FutureBuilder(
         future: db.getSommeCourDispense(coursActuel),
         builder: (context, snapshot) {
